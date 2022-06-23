@@ -55,7 +55,7 @@ export class RestaurantesController {
     try {
       this.logger.debug('criarRestante'+JSON.stringify(criarRestante));
       this.logger.log(criarRestante);   
-      return this.clientRestaurante.send('criar-restaurante', criarRestante);
+      return this.clientRestaurante.send('criar-restaurante', criarRestante);  /* envio de mensagem assíncrona - aguarda resposta assíncrona */
     } catch (error) {
        throw new HttpException(error, HttpStatus.CONFLICT)
     }
