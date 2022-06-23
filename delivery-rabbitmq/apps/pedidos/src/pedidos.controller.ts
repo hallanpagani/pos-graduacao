@@ -41,7 +41,7 @@ export class PedidosController {
   constructor(private pedidosService: PedidosService) {}
 
   //@MessagePattern('criar-pedido')
-  @EventPattern('criar-pedido')
+  @EventPattern('criar-pedido') /* Event based - Subscriber/Sem resposta para o Request */
   async criarPedido(@Body() payload, @UsuarioDecorator() user: Usuario) {
     try {
       this.logger.debug('criar-pedido')
