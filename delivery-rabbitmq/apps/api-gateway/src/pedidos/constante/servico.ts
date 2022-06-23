@@ -1,0 +1,1 @@
+export const SERVICO_PEDIDOS = "PEDIDOS"
