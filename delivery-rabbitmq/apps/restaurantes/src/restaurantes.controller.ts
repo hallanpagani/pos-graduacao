@@ -40,7 +40,7 @@ export class RestaurantesController {
     @Inject(SERVICO_RESTAURANTE) private clientRestaurante: ClientProxy
   ) {}
 
-  @MessagePattern('criar-restaurante')   /* Padrão publish/subscriber */
+  @MessagePattern('criar-restaurante')   /* request/reply */
   async criarRestaurante(
    @Payload() payload
   ) {
@@ -53,7 +53,7 @@ export class RestaurantesController {
     }
   }
   
-  @MessagePattern('buscar-restaurantes')  /* Requestor/Responder */
+  @MessagePattern('buscar-restaurantes')  /* request/reply */
   async buscarTodosRestaurantes(
     @Payload() payload: any,
     @Ctx() ctx: RmqContext
@@ -66,7 +66,7 @@ export class RestaurantesController {
     return this.restauranteService.buscarRestaurantes(payload.restauranteID);
   }
 
-  @MessagePattern('atualizar-restaurante') /* publicar eventos */
+  @MessagePattern('atualizar-restaurante') /* request/reply */
   async atualizarRestaurante(
     @Payload() payload,
     @Ctx() ctx: RmqContext
@@ -79,7 +79,7 @@ export class RestaurantesController {
     }
   }
 
-  @MessagePattern('deletar-restaurante') /* publicar eventos */
+  @MessagePattern('deletar-restaurante') /* request/reply */
   async deletarRestaurante(
     @Payload() payload: any,
     @Ctx() ctx: RmqContext
@@ -99,7 +99,7 @@ export class RestaurantesController {
 
   }
 
-  @MessagePattern('criar-produto') /* publicar eventos */
+  @MessagePattern('criar-produto') /* request/reply */
   async criarProduto(
     @Payload() payload
   ) {
@@ -119,7 +119,7 @@ export class RestaurantesController {
     } 
   }
 
-  @MessagePattern('buscar-produtos') /* request-response  */
+  @MessagePattern('buscar-produtos') /* request/reply */
   async buscarProdutos(
     @Payload() payload,
   ): Promise<Produto[]> {
@@ -132,7 +132,7 @@ export class RestaurantesController {
     return this.produtosService.buscarProdutosDoRestaurante(payload.restauranteID);
   }
 
-  @MessagePattern('deletar-produto') /* publicar eventos */
+  @MessagePattern('deletar-produto') 
   async deletarProdutoDoRestaurante(@Payload() payload : any) {
     return this.produtosService.deletarProdutodoRestaurante(
       payload.restauranteID,
